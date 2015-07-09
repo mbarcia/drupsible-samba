@@ -5,8 +5,8 @@
   with_items:
   - samba
 
-- name: Copy shared folders into smb-vlad.conf
-  template: dest=/etc/samba/smb-drupsible.conf src=smb-vlad.j2
+- name: Copy shared folders into smb-drupsible.conf
+  template: dest=/etc/samba/smb-drupsible.conf src=smb-drupsible.j2
 
 - name: Include shared folders in smb.conf
   lineinfile: dest=/etc/samba/smb.conf line="include=/etc/samba/smb-drupsible.conf"
