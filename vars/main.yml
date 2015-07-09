@@ -1,0 +1,5 @@
+---
+samba_daemon: smbd
+samba_pattern: "smbd -F"
+netbios_samba_daemon: nmbd
+netbios_samba_pattern: "nmbd -D"

@@ -1,0 +1,15 @@
+---
+# Install and configure samba server (requires ports 137, 138, 139, 445 open).
+- name: Ensure Samba-related packages are installed.
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - samba
+
+- name: Copy shared folders into smb-vlad.conf
+  template: dest=/etc/samba/smb-drupsible.conf src=smb-vlad.j2
+
+- name: Include shared folders in smb.conf
+  lineinfile: dest=/etc/samba/smb.conf line="include=/etc/samba/smb-drupsible.conf"
+  notify:
+    - restart smbd
+    - restart nmbd

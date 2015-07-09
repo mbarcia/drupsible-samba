@@ -1,0 +1,23 @@
+# {{ ansible_managed }}
+
+[app]
+    comment = Local App Server - /var/www/{{ app_name }}
+    path = /var/www/{{ app_name }}
+    browsable = yes
+    guest ok = yes
+    read only = no
+    create mask = 0664
+    force user = {{ app_env['user'] }}
+    force group = {{ app_env['group'] }}
+#[docroot] End
+
+[vagrant]
+    comment = Vagrant Home - /home/vagrant
+    path = /home/vagrant
+    browsable = yes
+    guest ok = yes
+    read only = no
+    create mask = 0664
+    force user = vagrant
+    force group = vagrant
+#[vagrant] End

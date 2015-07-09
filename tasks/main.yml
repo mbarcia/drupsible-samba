@@ -1,0 +1,7 @@
+---
+- include: smb-install.yml
+
+- name: creates app directory
+  file:
+    path: /var/www/{{ app_name }}
+    state: directory
