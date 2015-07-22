@@ -12,7 +12,7 @@
     force group = {{ app_env['group'] }}
 #[{{ webhost }}.{{ webdomain }} app] End
 
-[{{ webhost }}.{{ webdomain }} vagrant]
+[{{ webhost }}.{{ webdomain }} vagrant home]
     comment = Vagrant Home - /home/vagrant
     path = /home/vagrant
     browsable = yes
@@ -22,4 +22,4 @@
     create mask = 0775
     force user = vagrant
     force group = vagrant
-#[{{ webhost }}.{{ webdomain }} vagrant] End
+#[{{ webhost }}.{{ webdomain }} vagrant home] End
