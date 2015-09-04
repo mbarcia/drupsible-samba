@@ -15,4 +15,22 @@ galaxy_info:
   categories:
     - system
 
-dependencies: []
+dependencies:
+  - role: debops.ferm
+    ferm_input_list:
+      - type: 'dport_accept'
+        protocol: 'tcp'
+        dport: [ '139', '145' ]
+        saddr: "{{ samba_ferm_allow|default('') }}"
+        accept_any: True
+        filename: 'smbd_dependency_accept'
+        weight: '50'
+        comment: 'Allow connections to the Drupsible Samba shares'
+      - type: 'dport_accept'
+        protocol: 'udp'
+        dport: [ '137', '138' ]
+        saddr: "{{ samba_ferm_allow|default('') }}"
+        accept_any: True
+        filename: 'nmbd_dependency_accept'
+        weight: '50'
+        comment: 'Allow connections to the Drupsible Samba shares (nmbd)'
