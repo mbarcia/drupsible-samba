@@ -1,6 +1,6 @@
 # {{ ansible_managed }}
 
-[{{ webhost }}.{{ webdomain }} app]
+[{{ samba_webhost }}.{{ webdomain }} app]
     comment = Local App Server - /var/www/{{ app_name }}
     path = /var/www/{{ app_name }}
     browsable = yes
@@ -10,9 +10,9 @@
     create mask = 0775
     force user = {{ app_env['user'] }}
     force group = {{ app_env['group'] }}
-#[{{ webhost }}.{{ webdomain }} app] End
+#[{{ samba_webhost }}.{{ webdomain }} app] End
 
-[{{ webhost }}.{{ webdomain }} vagrant home]
+[{{ samba_webhost }}.{{ webdomain }} vagrant home]
     comment = Vagrant Home - /home/vagrant
     path = /home/vagrant
     browsable = yes
@@ -22,4 +22,4 @@
     create mask = 0775
     force user = vagrant
     force group = vagrant
-#[{{ webhost }}.{{ webdomain }} vagrant home] End
+#[{{ samba_webhost }}.{{ webdomain }} vagrant home] End
