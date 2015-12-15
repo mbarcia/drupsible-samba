@@ -20,17 +20,17 @@ dependencies:
     ferm_input_list:
       - type: 'dport_accept'
         protocol: 'tcp'
-        dport: [ '139', '145' ]
+        dport: [ '137', '138', '139', '445']
         saddr: "{{ samba_ferm_allow|default('') }}"
         accept_any: True
-        filename: 'smbd_dependency_accept'
+        filename: 'samba_dependency_accept_tcp'
         weight: '50'
-        comment: 'Allow connections to the Drupsible Samba shares'
+        comment: 'Allow connections to the Drupsible Samba shares (TCP)'
       - type: 'dport_accept'
         protocol: 'udp'
-        dport: [ '137', '138' ]
+        dport: [ '137', '138', '139', '445']
         saddr: "{{ samba_ferm_allow|default('') }}"
         accept_any: True
-        filename: 'nmbd_dependency_accept'
+        filename: 'samba_dependency_accept_udp'
         weight: '50'
-        comment: 'Allow connections to the Drupsible Samba shares (nmbd)'
+        comment: 'Allow connections to the Drupsible Samba shares (UDP)'
