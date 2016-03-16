@@ -1,0 +1,24 @@
+---
+samba_ferm_dependent_rules:
+- type: 'accept'
+  protocols: [ 'tcp' ]
+  dport: [ '139', '145' ]
+  saddr: "{{ samba_ferm_allow|default(['10.0.2.2']) }}"
+  accept_any: True
+  filename: 'smbd_dependency_accept'
+  weight: '50'
+  comment: 'Allow connections to the Drupsible Samba shares'
+  multiport: True
+  role: 'samba'
+  name: 'netbios-ssn_microsoft-ds'
+- type: 'accept'
+  protocols: [ 'udp' ]
+  dport: [ '137', '138' ]
+  saddr: "{{ samba_ferm_allow|default(['10.0.2.2']) }}"
+  accept_any: True
+  filename: 'nmbd_dependency_accept'
+  weight: '50'
+  comment: 'Allow connections to the Drupsible Samba shares (nmbd)'
+  role: 'samba'
+  name: 'netbios-ns_dgm'
+  multiport: True

@@ -3,5 +3,5 @@
 
 - name: creates app directory
   file:
-    path: /var/www/{{ app_name }}
+    path: "/var/www/{{ app_name }}"
     state: directory

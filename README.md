@@ -10,11 +10,11 @@ You will notice a new "LOCAL" server in your network when the Vagrant VM is up. 
 - local.mygreatwebsite.com app
 - local.mygreatwebsite.com vagrant home
 
-The shares are named after the ``app_webhost`` configured in the ``ansible/inventory/host_vars/local.mygreatwebsite.com.yml`` and the ``webdomain`` configured in ``ansible/inventory/group_vars/all.yml``
+The shares are named after the ``app_webhost`` and ``webdomain`` configured in the inventory file ``ansible/inventory/<app_name>-local``
 
 The app share is the important one, but you still have access to the home folder in case you want to make changes to the Vagrantfile or ansible/requirements.yml file.
 
-Open ``local.mygreatwebsite.com app`` and you will see a list of folders, something like this:
+Open ``local.<webdomain>.com app`` and you will see a list of folders, something like this:
 - logs
 - public_html
 - public\_html.20160114_1138
@@ -31,10 +31,4 @@ The logs folder contains:
 - drupal.log (Drupal syslog events)
 - error.log (Apache error log
 
-You can always disable syslog events in the ``ansible/inventory/host_vars/local.mygreatwebsite.com.yml`` syslog parameter (yes/no).
-
-## Dependencies
-This role depends upon the DebOps 'ferm' role to open the relevant ports in the firewall.
-
-## Customization
-Currently, this role has nothing "customizable".
+You can always disable syslog events in the ``ansible/inventory/group_vars/<app_name>-local/deploy.yml`` syslog parameter (yes/no).

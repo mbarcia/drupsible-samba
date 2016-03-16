@@ -1,15 +1,19 @@
 ---
 # Install and configure samba server (requires ports 137, 138, 139, 445 open).
 - name: Ensure Samba-related packages are installed.
-  apt: pkg={{ item }} state=installed
-  with_items:
-  - samba
+  package: 
+    name: samba
+    state: latest
 
 - name: Copy shared folders into smb-drupsible.conf
-  template: dest=/etc/samba/smb-drupsible.conf src=smb-drupsible.j2
+  template: 
+    src: smb-drupsible-app.j2
+    dest: "/etc/samba/smb-{{ app_name }}.conf" 
 
 - name: Include shared folders in smb.conf
-  lineinfile: dest=/etc/samba/smb.conf line="include=/etc/samba/smb-drupsible.conf"
+  lineinfile: 
+    dest: /etc/samba/smb.conf 
+    line: "include=/etc/samba/smb-{{ app_name }}.conf"
   notify:
     - restart smbd
     - restart nmbd
