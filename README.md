@@ -31,4 +31,4 @@ The logs folder contains:
 - drupal.log (Drupal syslog events)
 - error.log (Apache error log
 
-You can always disable syslog events in the ``ansible/inventory/group_vars/<app_name>-local/deploy.yml`` syslog parameter (yes/no).
+You can always disable syslog events in the ``ansible/playbooks/group_vars/<app_name>-local/deploy.yml`` deploy_syslog_enabled parameter (yes/no).
