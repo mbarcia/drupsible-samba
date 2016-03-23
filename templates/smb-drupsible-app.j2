@@ -8,8 +8,8 @@
     follow symlinks = yes
     read only = no
     create mask = 0775
-    force user = {{ app_env['user'] }}
-    force group = {{ app_env['group'] }}
+    force user = {{ app_user }}
+    force group = {{ app_group }}
 #[{{ samba_webhost }}.{{ webdomain }} app] End
 
 [{{ samba_webhost }}.{{ webdomain }} vagrant home]
