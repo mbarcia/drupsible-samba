@@ -4,11 +4,11 @@
     name: "{{ samba_daemon }}" 
     state: restarted
     pattern: "{{ samba_pattern }}"
-  sudo: true
+  become: true
 
 - name: restart nmbd
   service: 
     name: "{{ netbios_samba_daemon }}" 
     state: restarted 
     pattern: "{{ netbios_samba_pattern }}"
-  sudo: true
+  become: true
