@@ -10,11 +10,11 @@ You will notice a new "LOCAL" server in your network when the Vagrant VM is up. 
 - local.mygreatwebsite.com app
 - local.mygreatwebsite.com vagrant home
 
-The shares are named after the ``app_webhost`` and ``webdomain`` configured in the inventory file ``ansible/inventory/<app_name>-local``
+The shares are named after the ``samba_webhost`` and ``samba_webdomain`` configured in the inventory file ``ansible/inventory/<app_name>-local``
 
 The app share is the important one, but you still have access to the home folder in case you want to make changes to the Vagrantfile or ansible/requirements.yml file.
 
-Open ``local.<webdomain>.com app`` and you will see a list of folders, something like this:
+Open ``local.<samba_webdomain>.com app`` and you will see a list of folders, something like this:
 - logs
 - public_html
 - public\_html.20160114_1138
