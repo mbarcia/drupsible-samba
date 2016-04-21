@@ -2,7 +2,7 @@
 samba_ferm_dependent_rules:
 - type: 'accept'
   protocols: [ 'tcp' ]
-  dport: [ '139', '145' ]
+  dport: [ '137', '139', '145', '445' ]
   saddr: "{{ samba_ferm_allow|default(['10.0.2.2']) }}"
   accept_any: True
   filename: 'smbd_dependency_accept'
