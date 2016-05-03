@@ -1,13 +1,58 @@
 ---
+# Vagrant Guest subnetwork range
+samba_ferm_eth0_allow: [ '192.168/8' ]
+# Vagrant Host subnetwork range
+samba_ferm_eth1_allow: [ '10.0/8' ]
+
+# Allow Netbios DGM/SSN/NS and Microsoft DS packets in/out of Host
 samba_ferm_dependent_rules:
 - type: accept
   protocols: [ tcp, udp ]
-  dport: [ 135, 136, 137, 138, 139, 145, 445 ]
-  saddr: "{{ samba_ferm_allow|default(['10.0.2.2']) }}"
+  dport: [ 137, 138, 139, 445 ]
+  interface: 'eth1'
+  saddr: "{{ samba_ferm_eth0_allow }}"
   accept_any: True
-  filename: samba_dependency_accept
+  filename: samba_dependency_eth1_input_accept
   weight: 50
   comment: "Allow connections to the Drupsible Samba shares"
   multiport: True
   role: samba
-  name: 'netbios-ssn-ns-dgm_microsoft-ds'
+  name: 'netbios-dgm-ssn-ns_microsoft-ds'
+- type: accept
+  chain: OUTPUT
+  protocols: [ tcp, udp ]
+  sport: [ 137, 138, 139, 445 ]
+  outerface: 'eth1'
+  daddr: "{{ samba_ferm_eth0_allow }}"
+  accept_any: True
+  filename: samba_dependency_eth1_output_accept
+  weight: 50
+  comment: "Allow outbound connections from the Drupsible VM"
+  multiport: True
+  role: samba
+  name: 'netbios-dgm-ssn-ns_microsoft-ds'
+- type: accept
+  protocols: [ tcp, udp ]
+  dport: [ 137, 138, 139, 445 ]
+  interface: 'eth0'
+  saddr: "{{ samba_ferm_eth1_allow }}"
+  accept_any: True
+  filename: samba_dependency_eth0_input_accept
+  weight: 50
+  comment: "Allow connections to the Drupsible Samba shares in eth0"
+  multiport: True
+  role: samba
+  name: 'netbios-dgm-ssn-ns_microsoft-ds'
+- type: accept
+  chain: OUTPUT
+  protocols: [ tcp, udp ]
+  sport: [ 137, 138, 139, 445 ]
+  outerface: 'eth0'
+  daddr: "{{ samba_ferm_eth1_allow }}"
+  accept_any: True
+  filename: samba_dependency_eth0_output_accept
+  weight: 50
+  comment: "Allow outbound connections from the Drupsible VM in eth0"
+  multiport: True
+  role: samba
+  name: 'netbios-dgm-ssn-ns_microsoft-ds'
