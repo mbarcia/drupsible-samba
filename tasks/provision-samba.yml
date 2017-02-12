@@ -1,0 +1,6 @@
+---
+# Provision a samba server software
+- name: Ensure Samba-related packages are installed.
+  package: 
+    name: samba
+    state: latest

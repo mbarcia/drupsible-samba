@@ -1,7 +1,21 @@
 ---
-- include: smb-install.yml
+- include: provision-samba.yml
+  tags: [ provision ]
 
-- name: creates app directory
+- name: Copy shared folders into smb-drupsible.conf
+  template: 
+    src: smb-drupsible-app.j2
+    dest: "/etc/samba/smb-{{ app_name }}.conf" 
+
+- name: Include shared folders in smb.conf
+  lineinfile: 
+    dest: /etc/samba/smb.conf 
+    line: "include=/etc/samba/smb-{{ app_name }}.conf"
+  notify:
+  - restart smbd
+  - restart nmbd
+
+- name: Create app directory
   file:
     path: "/var/www/{{ app_name }}"
     state: directory

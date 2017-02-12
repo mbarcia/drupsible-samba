@@ -1,5 +1,5 @@
 # drupsible-samba
-Drupsible role for installing Samba inside a Vagrant guest running on a Windows host. Its main purpose is to overcome the known limitations and pitfalls of the NFS sync'ed folders of Vagrant.
+Drupsible role for installing Samba inside a Vagrant guest running on a Windows host. Its main purpose is to overcome the known limitations and pitfalls of the vboxsf and NFS sync'ed folders of Vagrant.
 
 This role installs and configures smbd and nmbd services, and creates two shares:
 - app shared folder
@@ -32,3 +32,6 @@ The logs folder contains:
 - error.log (Apache error log
 
 You can always disable syslog events in the ``ansible/playbooks/group_vars/<app_name>-local/deploy.yml`` deploy_syslog_enabled parameter (yes/no).
+
+## Ports
+On the server, this service requires ports 137, 138, 139 and 445 to be whitelisted/opened in the firewall.
