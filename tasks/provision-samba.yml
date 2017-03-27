@@ -4,3 +4,4 @@
   package: 
     name: samba
     state: latest
+    use: apt
